@@ -1,0 +1,22 @@
+<html lang="en">
+  <head>
+    <meta charSet="utf-8"/>
+    <title>chatroom</title>
+  </head>
+  <body>
+    <h1>現在の人数</h1>
+    <h2 id="counter">0人</h2>
+  </body>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script>
+  var socket = io.connect("localhost:3000");
+
+  socket.on('change', function(o){
+    document.getElementById("counter").innerHTML = o.count + "人";
+  });
+
+  socket.on('connect', function () {
+    socket.emit('join');
+  })
+  </script>
+</html>
